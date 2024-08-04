@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+        
+        <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+            <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/test"/>
+            <property name="username" value="root"/>
+            <property name="password" value="1234"/>
+        </bean>
+        
+        <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">	
+        	<constructor-arg ref="hikariConfig" />
+        </bean>
+        
+</beans>

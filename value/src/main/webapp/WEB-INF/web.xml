@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app
+        xmlns = "https://jakarta.ee/xml/ns/jakartaee"
+        xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation = "https://jakarta.ee/xml/ns/jakartaee
+        https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+        version = "6.0"
+        metadata-complete = "false"
+>
+  <display-name>myValue</display-name>
+  <servlet>
+  	<!-- 매핑을 위해 서블릿을 연관 짓기 위한 서블릿 이름 지정 -->
+  	<servlet-name>dispatcher</servlet-name>
+  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  </servlet>
+  
+  <!-- 사용자의 서블릿 요청을 위한 서블릿 매핑 -->
+  <servlet-mapping>
+  	<servlet-name>dispatcher</servlet-name>
+	<!-- 모든 url에 대해서 적용 -->
+  	<url-pattern>/</url-pattern>
+  </servlet-mapping>
+  
+  	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>
+		    org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/</url-pattern>
+	</filter-mapping>
+
+	<context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            <!-- 
+                context파일 경로설정 
+                나중에 context파일 생성 후 경로를 지정해주면 됩니다.
+            -->
+            classpath*:value/spring/context-*.xml
+        </param-value>
+    </context-param>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<session-config>
+		<session-timeout>-1</session-timeout>
+	</session-config>
+  
+</web-app>
