@@ -5,8 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
-@Repository(value = "valueMapper")
-public interface valueMapper {
+public interface testMapper {
 
 	List<Map<?,?>> selectTable();
 }	

@@ -16,12 +16,12 @@
         <constructor-arg index="0" ref="sqlSessionFactory"/>
     </bean>
 
-<!-- 	<mybatis-spring:scan base-package="value.my.mapper"/> -->
+	<mybatis-spring:scan base-package="value.my.mapper"/>
 
-	<bean id="valueMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-	    <property name="mapperInterface" value="value.my.mapper.valueMapper" />
+<!-- 	<bean id="testMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	    <property name="mapperInterface" value="value.my.mapper.testMapper" />
 	    <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
-	</bean>
+	</bean> -->
 
 
 </beans>

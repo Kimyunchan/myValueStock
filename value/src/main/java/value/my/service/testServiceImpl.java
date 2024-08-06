@@ -10,16 +10,16 @@ import value.my.mapper.*;
 @Service
 public class testServiceImpl implements testService{
 
-	private final valueMapper valueMapper;
+	private final testMapper testMapper;
 	
 	@Autowired
-	public testServiceImpl(valueMapper valueMapper) {
-		this.valueMapper = valueMapper;
+	public testServiceImpl(testMapper testMapper) {
+		this.testMapper = testMapper;
 	}
 		
 	public List<Map<?,?>> getList(){
 		
-		List<Map<?,?>> list = valueMapper.selectTable();
+		List<Map<?,?>> list = testMapper.selectTable();
 		
 		return list;
 		
