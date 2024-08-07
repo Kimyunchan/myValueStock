@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="value.my.board.infra.BoardMapper">
+
+    <select id="getList" resultType="value.my.board.BoardDTO">
+        SELECT        
+              ID
+            , CONTENT
+            , AUTHOR_ID
+            , CREATE_DATETIME 
+        FROM 
+            BOARD
+    </select>
+    
+    <select id="getId" parameterType = "int" resultType="value.my.board.BoardDTO">
+        SELECT        
+              ID
+            , CONTENT
+            , AUTHOR_ID
+            , CREATE_DATETIME 
+        FROM 
+            BOARD
+        WHERE 
+        	ID = #{id}
+    </select>
+    
+     <insert id="createBoard" parameterType ="value.my.board.BoardDTO">
+        INSERT INTO BOARD(ID,CONTENT,AUTHOR_ID,CREATE_DATETIME)
+        VALUES(#{id},#{content},#{authorId},#{createDatetime})
+    </insert>
+    
+    <update id="updateBoard" parameterType ="value.my.board.BoardDTO">
+        UPDATE
+            BOARD
+        SET 
+        	CONTENT = #{content}
+        	,UPDATE_DATETIME = #{updateDatetime}
+        WHERE 
+        	ID = #{id}
+    </update>
+    
+    <delete id="deleteBoard" parameterType ="int">
+        DELETE FROM BOARD
+        WHERE 
+        	ID = #{id}
+    </delete>
+    
+</mapper>

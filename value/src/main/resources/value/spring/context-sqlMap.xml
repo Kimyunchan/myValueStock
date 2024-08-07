@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-     xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+     xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
      xsi:schemaLocation="
      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
      http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
@@ -16,12 +16,12 @@
         <constructor-arg index="0" ref="sqlSessionFactory"/>
     </bean>
 
-	<mybatis-spring:scan base-package="value.my.mapper"/>
+  	<mybatis:scan base-package="value.my.*.infra"/>
 
 <!-- 	<bean id="testMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-	    <property name="mapperInterface" value="value.my.mapper.testMapper" />
+	    <property name="mapperInterface" value="value.my.test.infra.testMapper" />
 	    <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
-	</bean> -->
+	</bean>   -->
 
 
 </beans>

@@ -1,11 +1,12 @@
-package value.my.service;
+package value.my.test;
 
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import value.my.mapper.*;
+import value.my.test.*;
+import value.my.test.infra.testMapper;
 
 @Service
 public class testServiceImpl implements testService{

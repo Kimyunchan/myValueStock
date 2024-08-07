@@ -1,4 +1,4 @@
-package value.my.service;
+package value.my.test;
 
 import java.util.List;
 import java.util.Map;
