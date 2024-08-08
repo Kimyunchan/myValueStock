@@ -57,12 +57,10 @@ public class BoardControllerTest {
 		BoardDTO boardDTO = listBoardDTO.get(0);
 
 		Assertions.assertThat(boardDTO.id).isEqualTo(1);
-		Assertions.assertThat(boardDTO.content).isEqualTo("테스트입니다");
+		Assertions.assertThat(boardDTO.title).isEqualTo("테스트입니다");
+		Assertions.assertThat(boardDTO.content).isEqualTo("테스트입니다111");
 		Assertions.assertThat(boardDTO.authorId).isEqualTo(1);
-
-		System.out.println("boardDTO.id===" + boardDTO.id);
-		System.out.println("boardDTO.content===" + boardDTO.content);
-		System.out.println("boardDTO.authorId===" + boardDTO.authorId);
+		Assertions.assertThat(boardDTO.replyCounts).isEqualTo(2);
 	}
 
 	@Test
@@ -74,27 +72,22 @@ public class BoardControllerTest {
 		BoardDTO boardDTO = (BoardDTO) mvcResult.getModelAndView().getModel().get("boardDTO");
 
 		Assertions.assertThat(boardDTO.id).isEqualTo(1);
-		Assertions.assertThat(boardDTO.content).isEqualTo("테스트입니다");
+		Assertions.assertThat(boardDTO.title).isEqualTo("테스트입니다");
+		Assertions.assertThat(boardDTO.content).isEqualTo("테스트입니다111");
 		Assertions.assertThat(boardDTO.authorId).isEqualTo(1);
-
-		System.out.println("boardDTO.id===" + boardDTO.id);
-		System.out.println("boardDTO.content===" + boardDTO.content);
-		System.out.println("boardDTO.authorId===" + boardDTO.authorId);
+	
 	}
 
 	@Test
 	public void D_게시글_생성() throws Exception {
 
-		BoardDTO boardDTO = new BoardDTO(2, "테스트2", 2);
-
-		System.out.println("boardDTO.id===" + boardDTO.id);
-		System.out.println("boardDTO.content===" + boardDTO.content);
-		System.out.println("boardDTO.authorId===" + boardDTO.authorId);
+		BoardDTO boardDTO = new BoardDTO(2,"테스트2", "테스트2", 2);
 
 		this.mockMvc
 				.perform(post("/board/create")
 						.contentType(MediaType.APPLICATION_FORM_URLENCODED)
 						.param("id", String.valueOf(boardDTO.id))
+						.param("title", boardDTO.title)
 						.param("content", boardDTO.content)
 						.param("authorId", String.valueOf(boardDTO.authorId)))
 				.andDo(print())
@@ -106,16 +99,13 @@ public class BoardControllerTest {
 	 @Test 
 	 public void E_게시글_수정() throws Exception {
 	  
-		 BoardDTO boardDTO = new BoardDTO(2, "테스트2222", 2);
-
-		 System.out.println("boardDTO.id===" + boardDTO.id);
-		 System.out.println("boardDTO.content===" + boardDTO.content);
-		 System.out.println("boardDTO.authorId===" + boardDTO.authorId);
+		 BoardDTO boardDTO = new BoardDTO(2,"테스트2", "테스트2222", 2);
 
 		 this.mockMvc
 				 .perform(post("/board/update")
 						 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
 						 .param("id", String.valueOf(boardDTO.id))
+						 .param("title", boardDTO.title)
 						 .param("content", boardDTO.content)	
 				 		 .param("authorId", String.valueOf(boardDTO.authorId)))
 				 .andDo(print())

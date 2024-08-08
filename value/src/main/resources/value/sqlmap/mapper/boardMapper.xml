@@ -3,18 +3,22 @@
 <mapper namespace="value.my.board.infra.BoardMapper">
 
     <select id="getList" resultType="value.my.board.BoardDTO">
-        SELECT        
-              ID
-            , CONTENT
-            , AUTHOR_ID
-            , CREATE_DATETIME 
-        FROM 
-            BOARD
+        select ID
+            , TITLE
+            , B.CONTENT CONTENT
+            , B.AUTHOR_ID AUTHOR_ID
+            , B.CREATE_DATETIME CREATE_DATETIME
+            , COUNT(R.REPLY_ID) AS REPLY_COUNTS
+		 from board b 
+		 left outer join reply r 
+		 on b.id = r.BOARD_ID
+		 group by b.id, b.title, b.content, b.author_id, b.CREATE_DATETIME
     </select>
     
     <select id="getId" parameterType = "int" resultType="value.my.board.BoardDTO">
         SELECT        
               ID
+			, TITLE
             , CONTENT
             , AUTHOR_ID
             , CREATE_DATETIME 
@@ -25,15 +29,16 @@
     </select>
     
      <insert id="createBoard" parameterType ="value.my.board.BoardDTO">
-        INSERT INTO BOARD(ID,CONTENT,AUTHOR_ID,CREATE_DATETIME)
-        VALUES(#{id},#{content},#{authorId},#{createDatetime})
+        INSERT INTO BOARD(TITLE,CONTENT,AUTHOR_ID,CREATE_DATETIME)
+        VALUES(#{title},#{content},#{authorId},#{createDatetime})
     </insert>
     
     <update id="updateBoard" parameterType ="value.my.board.BoardDTO">
         UPDATE
             BOARD
         SET 
-        	CONTENT = #{content}
+        	TITLE = #{title}
+        	,CONTENT = #{content}
         	,UPDATE_DATETIME = #{updateDatetime}
         WHERE 
         	ID = #{id}

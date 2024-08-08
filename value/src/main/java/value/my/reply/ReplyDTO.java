@@ -1,48 +1,43 @@
-package value.my.board;
+package value.my.reply;
 
 import java.beans.ConstructorProperties;
 import java.time.LocalDateTime;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class BoardDTO {
-
-	public int id;
-	public String title;
+public class ReplyDTO {
+	
+	public int replyId;
 	public String content;
+	public int boardId;
 	public int authorId;
-	public int replyCounts;
 	@DateTimeFormat
 	public LocalDateTime createDatetime;
 	@DateTimeFormat
 	public LocalDateTime updateDatetime;
 	
-	@ConstructorProperties({"id", "title", "content", "authorId"})
-	public BoardDTO(int id, String title, String content, int authorId) {
-		this.id = id;
-		this.title = title;
+	@ConstructorProperties({"replyId", "content", "boardId", "authorId"})
+	public ReplyDTO(int replyId, String content, int boardId, int authorId){
+		this.replyId = replyId;
 		this.content = content;
+		this.boardId = boardId;
 		this.authorId = authorId;
 	}
-		
-	public int getId() {
-		return id;
+
+	public int getReplyId() {
+		return replyId;
 	}
 
-	public String getTitle() {
-		return title;
-	}
-	
 	public String getContent() {
 		return content;
+	}
+	
+	public int getBoardId() {
+		return boardId;
 	}
 
 	public int getAuthorId() {
 		return authorId;
-	}
-	
-	public int getReplyCounts() {
-		return replyCounts;
 	}
 
 	public LocalDateTime getCreateDatetime() {
@@ -52,7 +47,6 @@ public class BoardDTO {
 	public LocalDateTime getUpdateDatetime() {
 		return updateDatetime;
 	}
-	
 	
 	
 }
