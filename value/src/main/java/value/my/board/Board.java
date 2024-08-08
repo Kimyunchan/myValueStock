@@ -5,28 +5,23 @@ import java.time.LocalDateTime;
 public class Board {
 
 	private int id;
+	private String title;
 	private String content;
 	private int authorId;
 	private LocalDateTime createDatetime;
 	public LocalDateTime updateDatetime;
 	
-	public Board(int id, String content, int authorId, LocalDateTime createDatetime) {
+	public Board(int id, String title,String content, int authorId, LocalDateTime createDatetime) {
 		this.id = id;
+		this.title = title;
 		this.content = content;
 		this.authorId = authorId;
 		this.createDatetime = createDatetime;
-	}
-	
-	public Board(int id, String content, int authorId, LocalDateTime createDatetime,LocalDateTime updateDatetime) {
-		this.id = id;
-		this.content = content;
-		this.authorId = authorId;
-		this.createDatetime = createDatetime;
-		this.updateDatetime = updateDatetime;
 	}
 	
 	public Board(Builder builder) {
 		this.id = builder.id;
+		this.title = title;
 		this.content = builder.content;
 		this.authorId = builder.authorId;
 		this.createDatetime = builder.createDatetime;
@@ -38,6 +33,7 @@ public class Board {
 
 	public static class Builder {
 		private int id;
+		private String title;
 		private String content;
 		private int authorId;
 		private LocalDateTime createDatetime;
@@ -48,6 +44,11 @@ public class Board {
 		
 		public Builder id(int id) {
 	      this.id = id;
+	      return this;
+	    }
+		
+		public Builder title(String title) {
+	      this.title = title;
 	      return this;
 	    }
 
@@ -72,6 +73,6 @@ public class Board {
 	}
 	
 	public BoardDTO toDto() {
-		return new BoardDTO(id,content,authorId);
+		return new BoardDTO(id,title,content,authorId);
 	}
 }

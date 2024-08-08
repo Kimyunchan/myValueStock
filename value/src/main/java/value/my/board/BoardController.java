@@ -9,23 +9,28 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;	
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import value.my.reply.ReplyDTO;
+import value.my.reply.ReplyService;	
 
 @Controller
 @RequestMapping("/board")
 public class BoardController {
 	
 	private BoardService boardService;
+	private ReplyService replyService;
 	
-	public BoardController(BoardService boardService) {
+	public BoardController(BoardService boardService, ReplyService replyService) {
 		this.boardService = boardService;
+		this.replyService = replyService;
 	}
 
 	@GetMapping("/list")
 	public String list(Model model) {
 		
 		List<BoardDTO> list = boardService.getList();
-		
+				
 		model.addAttribute("list", list);
 		
 		return "/board/board_list";
@@ -35,8 +40,10 @@ public class BoardController {
 	public String list(Model model, @PathVariable("id") int id) {
 		
 		BoardDTO boardDTO = boardService.getId(id);
+		List<ReplyDTO> replyList = replyService.getReplyList(boardDTO.id);
 		
 		model.addAttribute("boardDTO", boardDTO);
+		model.addAttribute("replyList", replyList);
 		
 		return "/board/board_detail";
 	}
@@ -54,7 +61,7 @@ public class BoardController {
 		boardDTO.createDatetime = LocalDateTime.now();
 		boardService.createBoard(boardDTO);
 		
-		return "redirect:/board/board_list";
+		return "redirect:/board/list";
 		
 	}
 	
@@ -74,7 +81,7 @@ public class BoardController {
 		
 		boardService.updateBoard(boardDTO);
 		
-		return "redirect:/board/board_list";
+		return "redirect:/board/list";
 		
 	}
 	
@@ -83,7 +90,7 @@ public class BoardController {
 		
 		boardService.deleteBoard(id);
 
-		return "redirect:/board/board_list";
+		return "redirect:/board/list";
 	}
 	
 }
